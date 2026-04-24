@@ -1,0 +1,118 @@
+Second Opinion
+===============
+
+Tagline: Your report, decoded. Your visit, prepared.
+
+---
+
+Track: Health and Wellbeing
+Hackathon: Anthropic x UMD Hackathon 2026
+
+---
+
+The Problem
+-----------
+
+Every day, millions of people receive medical reports they cannot read, from a
+system that does not explain itself. They guess. They Google. They either panic
+and rush to the ER, or dismiss something serious and wait too long.
+
+This is especially true for students, uninsured individuals, and anyone without
+a doctor they can call. Medical knowledge is locked behind jargon. Most people
+navigate it alone.
+
+The Solution
+------------
+
+Second Opinion is an AI-powered patient preparation tool. Upload your lab
+results, blood panel, or radiology report. Three AI specialists analyze it
+simultaneously from different angles:
+
+  - The Optimist     finds what is normal, stable, and reassuring
+  - The Skeptic      flags values that deserve follow-up or clarification
+  - The Systems      Thinker connects findings to each other and to the
+                     bigger picture
+
+A fourth synthesis agent reconciles their debate into:
+
+  - A plain-English summary (no jargon)
+  - A ranked list of questions to ask your doctor
+  - A triage stamp: Reassuring / Watchful / See Doctor Soon
+  - Nearby clinics tuned to urgency level (ER, urgent care, or primary care)
+
+No diagnosis. No jargon. No guessing.
+Just you, walking into your next appointment knowing exactly what to say.
+
+---
+
+What Makes It Different
+-----------------------
+
+Most health tools either diagnose (legally risky, often wrong) or remind you to
+take pills (useful but simple). Second Opinion occupies the gap between them.
+
+It does not tell you what is wrong. It tells you what to ask.
+
+The three-agent architecture means different failure modes get caught by
+different lenses. The Skeptic might flag a borderline creatinine value. The
+Systems Thinker connects it to an elevated WBC. The Optimist notes that
+everything else looks stable. A single AI call would give you one perspective.
+This gives you three that disagree with each other — which is closer to how
+real clinical review actually works.
+
+One sentence: Not a second doctor. A first advocate.
+
+---
+
+How It Works
+------------
+
+1. User uploads a medical report (PDF, image, or paste text)
+2. Three Claude agents run in parallel via Promise.all()
+3. Each returns structured JSON: findings, concerns, strengths, questions
+4. Synthesis agent reconciles all three into a final checklist
+5. Nearby clinics render based on urgency tone
+
+Tech stack:
+  - React 18
+  - Anthropic Claude Sonnet (claude-sonnet-4-20250514)
+  - Streaming API for live token display
+  - pdfjs-dist for PDF text extraction
+  - Claude Vision API for image/photo uploads
+  - No external UI libraries
+
+---
+
+Challenges
+----------
+
+  - Keeping all three agents from returning overlapping findings
+  - Designing prompts that prevent any agent from speculating on diagnosis
+  - Streaming three simultaneous responses cleanly into separate UI cards
+  - Balancing medical usefulness with responsible safety framing
+
+---
+
+Alignment with Track
+--------------------
+
+Track problem: "Medical knowledge is locked behind jargon and paywalls.
+Billions lack quality care. Most people navigate these systems alone, without
+the literacy to make good decisions or recognize when they need help."
+
+Second Opinion addresses this directly:
+
+  - Locked behind jargon        -> plain English summary and term clarification
+  - Navigate systems alone      -> three-perspective AI companion
+  - Recognize when they need    -> urgency triage stamp and nearby clinic finder
+    help
+
+---
+
+Disclaimer
+----------
+
+Second Opinion is a preparation tool only. It does not provide medical
+diagnoses, treatment recommendations, or replace professional medical advice.
+Always discuss your results with a qualified healthcare provider. In an
+emergency, call 911.
